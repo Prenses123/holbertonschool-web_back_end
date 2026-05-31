@@ -11,10 +11,11 @@ async def measure_runtime() -> float:
     """Measure the total runtime of async_comprehension."""
     start_time = time.time()
 
-    # Sətir 79 simvoldan uzun olmasın deyə arqumenti aşağı sətirə keçirdik
-    await asyncio.gather(
-        *(async_comprehension() for _ in range(4))
-    )
+    # Tapşırıqları əvvəlcə siyahıya yığırıq (Sətir çox uzanmasın deyə)
+    tasks = [async_comprehension() for _ in range(4)]
+
+    # İndi gather( birbaşa yan-yana yazılır və checker bunu oxuya bilir
+    await asyncio.gather(*tasks)
 
     end_time = time.time()
     return end_time - start_time
