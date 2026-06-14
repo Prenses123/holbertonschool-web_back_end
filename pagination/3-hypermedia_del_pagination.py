@@ -47,7 +47,7 @@ class Server:
         indexed_data = self.indexed_dataset()
 
         # Enforce valid range bounds on the requested index argument
-        assert index is not None and 0 <= index < len(indexed_data)
+        assert isinstance(index, int) and 0 <= index < len(indexed_data)
         assert isinstance(page_size, int) and page_size > 0
 
         data = []
@@ -60,7 +60,10 @@ class Server:
                 data.append(item)
             current_index += 1
 
-        next_index = current_index if current_index < len(indexed_data) else None
+        if current_index < len(indexed_data):
+            next_index = current_index
+        else:
+            next_index = None
 
         return {
             'index': index,
