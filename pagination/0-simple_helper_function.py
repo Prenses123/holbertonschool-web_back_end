@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Simple helper function
+This module contains a helper function for a pagination system.
 """
 from typing import Tuple
 
 
-def indef_range(page: int, page_size: int) -> Tuple[int, int]:
-    """Returns page numbers to display in pagination."""
-    start = (page - 1) * page_size
-    end = page * page_size
-    return (start, end)
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """
+    Calculate the start and end indexes for a particular page and page size.
+    """
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+    return (start_index, end_index)
